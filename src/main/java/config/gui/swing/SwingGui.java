@@ -11,15 +11,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import constants.Constants;
+import constantsAndConfiguration.Constants;
 
 public class SwingGui {
 
 	private JFrame mainStage;
+	
+	//JStuff
 	private JPanel panel;
 	private JComponent banner;
-	private JPanel recognitionPanel;
-	private GestureWindow gestureWindow;
+	
+	//fillers JStuff
+	private RecognitionWindow recognitionWindow;
 
 	//core window: assigning elements
 	public void createStage() {
@@ -34,6 +37,7 @@ public class SwingGui {
 
 			// add components to frame
 			jFrame.add(bringBanner());
+			jFrame.add(bringButton_Config());
 			jFrame.add(bringPanel_Main());
 		}
 	}
@@ -44,31 +48,24 @@ public class SwingGui {
 			mainPanel.setBounds(40, 100, 500, 400);
 			mainPanel.setBackground(Color.CYAN);
 			mainPanel.setLayout(new FlowLayout());
-			mainPanel.add(bringButton_Config());
-			mainPanel.add(bringPanel_Recognition());
+			mainPanel.add(bringRecognitionWindow());
 			return mainPanel;
 		}
 		return panel;
 	}
 
-	private JTabbedPane bringTab() {
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		return tabbedPane;
-	}
-
-	private JPanel bringPanel_Recognition() {
-		if (recognitionPanel == null) {
-			JPanel recognitionPanel = new JPanel();
-			recognitionPanel.setBounds(10, 10, 480, 380);
-			recognitionPanel.setBackground(Color.GREEN);
+	private JPanel bringRecognitionWindow() {
+		if (recognitionWindow== null) {
+			RecognitionWindow recognitionWindow = new RecognitionWindow();
 			
-			return recognitionPanel;
+			return recognitionWindow;
 		}
-		return recognitionPanel;
+		return recognitionWindow;
 	}
 	
 	private JComponent bringButton_Config() {
 		JButton configButton = new JButton("Configuration");
+		configButton.setBounds(200, 20, 200, 50);
 		return configButton;
 	}
 
@@ -81,5 +78,9 @@ public class SwingGui {
 		}
 		return banner;
 	}
-
+	
+	private JTabbedPane bringTab() {
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		return tabbedPane;
+	}
 }

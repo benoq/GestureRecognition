@@ -8,7 +8,7 @@ import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 
-public class Signal_ImplFromAWT implements MouseListener, MouseMotionListener{
+public class SignalController {
 	
 	private SignalSequence memberSequence;
 
@@ -37,6 +37,9 @@ public class Signal_ImplFromAWT implements MouseListener, MouseMotionListener{
 		
 		//core: the path of the mouse/signal
 		sequenceThatCouldBeGesture.addSignal(System.currentTimeMillis(), currentPoint);
+		
+		//visualize the dragging
+		
 
         // in the beta: log on the console  
 		System.out.println("Dragging x: "+e.getX() + ", y:"+e.getY());
@@ -52,21 +55,21 @@ public class Signal_ImplFromAWT implements MouseListener, MouseMotionListener{
 	}
 
 	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		//currently not needed 
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		//currently not needed 
 		
 	}
 
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		//currently not needed 
 		
 	}
 
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub		
+		//currently not needed 		
 	}
 
 
