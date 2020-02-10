@@ -1,4 +1,4 @@
-package receiverFromAWT;
+package SignalProcessing;
 
 import java.awt.Point;
 

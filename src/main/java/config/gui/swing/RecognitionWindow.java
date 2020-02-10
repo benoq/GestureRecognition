@@ -1,7 +1,8 @@
 package config.gui.swing;
 
 import java.awt.Color;
-import java.awt.Event;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.LayoutManager;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,12 +10,13 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 
+import SignalProcessing.SignalController;
 import constantsAndConfiguration.ConfigurationConstants;
-import receiverFromAWT.SignalController;
 
 public class RecognitionWindow extends JPanel implements MouseMotionListener, MouseListener {
 	
 	private SignalController member_SignalController = new SignalController();
+//	private Vector<Double> time
 	
 	public RecognitionWindow() {
 		super();
@@ -23,22 +25,45 @@ public class RecognitionWindow extends JPanel implements MouseMotionListener, Mo
 		addMouseMotionListener(this);
 		setVisible(true);
 		setBounds(10, 10, 480, 380);
-		setBackground(Color.RED);
 	}
 	
-//	public RecognitionWindow createNewInstance() {
-//	 
-//	}
+	//the 'override' method for swing graphis
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		for (int i = 0; i < 2; i++) {
+         g.draw3DRect(5, 5, 5, 5, true);
+		}
+
+	}
+	
+	public RecognitionWindow createStandardInstance() {
+		RecognitionWindow standardRecWin = new RecognitionWindow();
+		
+		standardRecWin.setBackground(ConfigurationConstants.recognitionColor);
+		standardRecWin.addMouseListener(this);
+		standardRecWin.addMouseMotionListener(this);
+		standardRecWin.setVisible(true);
+		standardRecWin.setBounds(10, 10, 480, 380);
+        return standardRecWin;
+	}
 	
 	public void mousePressed(MouseEvent e) {
 		//give event to other class that should handle execution
 		member_SignalController.mousePressed(e);
+		
+
+		
 	}
 	
 	public void mouseDragged(MouseEvent e) {
 		//give event to other class that should handle execution
 		member_SignalController.mouseDragged(e);
-		this.paintImmediately(this.getBounds());
+		
+    	OvalPoint op = new OvalPoint();		
+    	this.add(op);
+    	this.setVisible(true);
+
+		this.toString();
 	}
 	
 	public void mouseReleased(MouseEvent e) {
@@ -68,6 +93,5 @@ public class RecognitionWindow extends JPanel implements MouseMotionListener, Mo
 	public void mouseMoved(MouseEvent arg0) {
 		
 	}
-	
 	
 }

@@ -38,27 +38,37 @@ public class SwingGui {
 			// add components to frame
 			jFrame.add(bringBanner());
 			jFrame.add(bringButton_Config());
-			jFrame.add(bringPanel_Main());
+			jFrame.add(bringPanel_Main());	
+			
 		}
 	}
 	
 	private JComponent bringPanel_Main() {
-		if (panel == null) {
+		if (true) {//(panel == null) {
 			JPanel mainPanel = new JPanel();
 			mainPanel.setBounds(40, 100, 500, 400);
 			mainPanel.setBackground(Color.CYAN);
 			mainPanel.setLayout(new FlowLayout());
 			mainPanel.add(bringRecognitionWindow());
+			
+//			JFrame test = new JFrame();
+//			mainPanel.add(new JFrame ());
 			return mainPanel;
 		}
 		return panel;
 	}
+	
+    private void drawsomthing(JPanel p) {
+    	OvalPoint op = new OvalPoint();		
+    	p.add(op);
+    	p.setVisible(true);
+    }
 
 	private JPanel bringRecognitionWindow() {
 		if (recognitionWindow== null) {
 			RecognitionWindow recognitionWindow = new RecognitionWindow();
 			
-			return recognitionWindow;
+			return recognitionWindow.createStandardInstance();
 		}
 		return recognitionWindow;
 	}
