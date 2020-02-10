@@ -7,6 +7,8 @@ import java.awt.LayoutManager;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.Vector;
+import java.awt.Point;
 
 import javax.swing.JPanel;
 
@@ -16,7 +18,8 @@ import constantsAndConfiguration.ConfigurationConstants;
 public class RecognitionWindow extends JPanel implements MouseMotionListener, MouseListener {
 	
 	private SignalController member_SignalController = new SignalController();
-//	private Vector<Double> time
+	private Vector<Point> clickVisualization;
+	
 	
 	public RecognitionWindow() {
 		super();
@@ -25,15 +28,16 @@ public class RecognitionWindow extends JPanel implements MouseMotionListener, Mo
 		addMouseMotionListener(this);
 		setVisible(true);
 		setBounds(10, 10, 480, 380);
+		clickVisualization = new Vector<Point>();
 	}
 	
-	//the 'override' method for swing graphis
+	//the 'override' method for swing graphics
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for (int i = 0; i < 2; i++) {
-         g.draw3DRect(5, 5, 5, 5, true);
+		
+		for (int j = 0; j < clickVisualization.size(); j++) {
+			((Graphics2D) g).drawOval((int) clickVisualization.get(j).getX(), (int) clickVisualization.get(j).getY(), 5, 5);
 		}
-
 	}
 	
 	public RecognitionWindow createStandardInstance() {
@@ -51,21 +55,19 @@ public class RecognitionWindow extends JPanel implements MouseMotionListener, Mo
 		//give event to other class that should handle execution
 		member_SignalController.mousePressed(e);
 		
-
-		
+		//also update old visualization with the start of a new sequence
+		clickVisualization.clear();
 	}
 	
 	public void mouseDragged(MouseEvent e) {
 		//give event to other class that should handle execution
 		member_SignalController.mouseDragged(e);
 		
-    	OvalPoint op = new OvalPoint();		
-    	this.add(op);
-    	this.setVisible(true);
-
-		this.toString();
+		//handle graphical output
+        clickVisualization.add(new Point(e.getX(),e.getY()));
+        this.paintImmediately(getBounds());
 	}
-	
+
 	public void mouseReleased(MouseEvent e) {
 		//give event to other class that should handle execution
 		member_SignalController.mouseReleased(e);
